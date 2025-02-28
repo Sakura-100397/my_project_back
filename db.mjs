@@ -3,14 +3,14 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const db = mysql.createConnection({ 
+const connection = mysql.createConnection({ 
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
 });
 
-db.connect(err => { 
+connection.connect(err => { 
     if(err){    
         console.log('接続エラー',err);
     }else{  
@@ -18,6 +18,8 @@ db.connect(err => {
     }
 });
 
-export default db;
+
+export default connection; 
+
 
 
