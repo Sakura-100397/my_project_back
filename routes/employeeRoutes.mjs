@@ -13,7 +13,7 @@ try {
 }
 });
 
-// router.post('/employee/register', createEmployee);
+ router.post('/employee/register', createEmployee);
 
 // router.get('/employees/:id', getEmployeeById);
 
