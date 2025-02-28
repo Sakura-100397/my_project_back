@@ -5,6 +5,7 @@ import db from './db.mjs';
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use('/employees', )
 
 
 app.listen(5000, () => {    
