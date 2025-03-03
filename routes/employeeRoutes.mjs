@@ -1,5 +1,6 @@
 import express from 'express';
 import { getAllEmployees } from '../controllers/getAllEmployeeController.mjs';
+import { createEmployee } from '../controllers/createEmployeeController.mjs';
 
 const router = express.Router();
 
