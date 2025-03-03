@@ -1,6 +1,6 @@
 import db from '../db.mjs';
 
-export const createEmployee = (req, res) => {
+export const registerEmployee = (req, res) => {
     const { name, address, mail, phone_number, position, password } = req.body;
 
 
