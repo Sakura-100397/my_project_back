@@ -3,12 +3,13 @@ import employeeRoutes from "./routes/employeeRoutes.mjs";
 // import cors from 'cors';
 import dotenv from 'dotenv';
 
-dotenv.config();  
+dotenv.config();
+
 const app = express();
 
-
 app.use(express.json());  
-app.use('/api', employeeRoutes);  
+
+app.use('/employees', employeeRoutes);   
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

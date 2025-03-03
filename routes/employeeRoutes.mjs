@@ -1,23 +1,17 @@
 import express from 'express';
 import { getAllEmployees } from '../controllers/getAllEmployeeController.mjs';
-import { createEmployee } from '../controllers/createEmployeeController.mjs';
 
 const router = express.Router();
 
-router.get('/employees',   (req, res) => { 
-
-try {   
-    const employees =  getAllEmployees();
-    res.json(employees);
-}catch(err){    
-    res.status(404).json({ error: 'データ取得エラー'});
-}
+router.get('/', async (req, res) => {
+  try {
+   
+    await getAllEmployees(req, res); 
+  } catch (err) {
+    res.status(500).json({ error: 'データ取得エラー' });
+  }
 });
 
- router.post('/employee/register', createEmployee);
-
-// router.get('/employees/:id', getEmployeeById);
-
-
 export default router;
+
 
