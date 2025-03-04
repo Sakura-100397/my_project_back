@@ -3,6 +3,6 @@ import { registerEmployee } from '../controllers/createEmployeeController.mjs';
 
 const employeeRegistrationRouter = express.Router();
 
-employeeRegistrationRouter.post('/employee/register', registerEmployee);
+employeeRegistrationRouter.post('/', registerEmployee);
 
 export default employeeRegistrationRouter;
