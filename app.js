@@ -10,6 +10,14 @@ app.use(cors());
 app.use(express.json());  
 
 app.use('/api', employeeRoutes);
+app.use(function(req, res) {  
+  res.status(404).json({msg: "Page Not Found" });
+});
+
+app.use(function (err, req, res, next) {
+  console.log(err);
+  res.status(500).json({ msg: "予期せぬエラーが発生しました。" });
+});
 
 const PORT = process.env.PORT || 5000;
 

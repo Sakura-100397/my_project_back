@@ -1,6 +1,8 @@
-import createDbConnection from '../../db.mjs';
+import { validationResult } from 'express-validator';
+import createDbConnection from '../../helpers/db.mjs';
 
 
+// 一覧取得
 export const getAllEmployees = async (req, res) => {
     try {
       const connection = await createDbConnection();  
@@ -8,7 +10,7 @@ export const getAllEmployees = async (req, res) => {
       
       const [results] = await connection.query('SELECT * FROM employees');  
   
-      res.status(200).json(results);  
+      res.status(201).json(results);  
     } catch (error) {
       console.error("DB接続失敗:", error);
       
@@ -17,7 +19,7 @@ export const getAllEmployees = async (req, res) => {
   };
 
 
-  
+//  詳細取得 
   export const getEmployeeDetails = async ( req, res) => {  
     const { id } = req.params;
 
@@ -42,15 +44,15 @@ export const getAllEmployees = async (req, res) => {
  };
 
 
- 
+//  登録
 export const registerEmployee = async (req, res) => {
-    try {
-        const { name, address, mail, phone_number, position, password } = req.body;
-
-        if (!name || !address || !mail || !phone_number || !position || !password) {
-            return res.status(400).json({ message: '必須項目が不足しています' });
+   try {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()){ 
+            return res.status(400).json({erros: errors.array()});
         }
 
+        const { name, address, mail, phone_number, position, password } = req.body;
         const db = await createDbConnection(); 
 
         const query = 'INSERT INTO employees (name, address, mail, phone_number, position, password) VALUES (?, ?, ?, ?, ?, ?)';
@@ -59,6 +61,7 @@ export const registerEmployee = async (req, res) => {
         await db.end();
 
         res.status(201).json({ message: '社員情報が登録されました', id: results.insertId });
+
     } catch (err) {
         console.error('データベース登録エラー: ', err);
         res.status(500).json({ message: 'DB Error', error: err.message });
