@@ -49,7 +49,7 @@ export const registerEmployee = async (req, res) => {
    try {
         const errors = validationResult(req);
         if (!errors.isEmpty()){ 
-            return res.status(400).json({erros: errors.array()});
+            return res.status(400).json({errors: errors.array()});
         }
 
         const { name, address, mail, phone_number, position, password } = req.body;
@@ -60,7 +60,7 @@ export const registerEmployee = async (req, res) => {
 
         await db.end();
 
-        res.status(201).json({ message: '社員情報が登録されました', id: results.insertId });
+        res.status(200).json({ message: '社員情報が登録されました', id: results.insertId });
 
     } catch (err) {
         console.error('データベース登録エラー: ', err);
