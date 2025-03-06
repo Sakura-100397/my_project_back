@@ -52,18 +52,18 @@ export const registerEmployee = async (req, res) => {
             return res.status(400).json({errors: errors.array()});
         }
 
-        const { name, address, mail, phone_number, position, password } = req.body;
+        const { employeeName, address, mail, phone_number, position, password } = req.body;
         const db = await createDbConnection(); 
 
-        const query = 'INSERT INTO employees (name, address, mail, phone_number, position, password) VALUES (?, ?, ?, ?, ?, ?)';
-        const [results] = await db.execute(query, [name, address, mail, phone_number, position, password]);
+        const query = 'INSERT INTO employees (employeeName, address, mail, phone_number, position, password) VALUES (?, ?, ?, ?, ?, ?)';
+        const [results] = await db.execute(query, [employeeName, address, mail, phone_number, position, password]);
 
         await db.end();
 
-        res.status(200).json({ message: '社員情報が登録されました', id: results.insertId });
+        res.status(200).json({  message: '社員情報が登録されました', id: results.insertId , status: 200});
 
     } catch (err) {
         console.error('データベース登録エラー: ', err);
-        res.status(500).json({ message: 'DB Error', error: err.message });
+        res.status(500).json({ message: 'DB Error', error: err.message, status: 500 });
     }
 };
