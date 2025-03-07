@@ -1,6 +1,6 @@
 import { validationResult } from "express-validator";
 
-export const requestErrorHandler = function ( contoroller) {    
+export const requestErrorHandler = function (contoroller) {    
     return async function (req, res, next) {
 
         try {  
@@ -11,7 +11,7 @@ export const requestErrorHandler = function ( contoroller) {
             await contoroller(req,res, next);
         }catch(err){  
             console.error("サーバーエラー:", err);  
-            next(err);
+            return res.status(500).json({ msg: "予期せぬエラーが発生しました", error: err.message });
         }
     };
 };

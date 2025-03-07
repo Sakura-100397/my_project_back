@@ -15,8 +15,13 @@ app.use(function(req, res) {
 });
 
 app.use(function (err, req, res, next) {
+  if (err.status === 400) {
+    console.log("バリデーションエラー:", err);
+    res.status(400).json({ msg: err.message });
+} else {
   console.log(err);
   res.status(500).json({ msg: "予期せぬエラーが発生しました。" });
+  }  
 });
 
 const PORT = process.env.PORT || 5000;

@@ -14,7 +14,7 @@ export const getAllEmployees = async (req, res) => {
     } catch (error) {
       console.error("DB接続失敗:", error);
       
-      res.status(400).json({ error: 'データを取得できませんでした。' });  
+      res.status(500).json({ error: 'データを取得できませんでした。' });  
     }
   };
 
@@ -64,6 +64,7 @@ export const registerEmployee = async (req, res) => {
 
     } catch (err) {
         console.error('データベース登録エラー: ', err);
-        res.status(500).json({ message: 'DB Error', error: err.message, status: 500 });
+        res.status(500).json({ msg: 'DB Error', error: err.message, status: 500 });
     }
 };
+
