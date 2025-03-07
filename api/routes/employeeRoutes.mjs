@@ -12,7 +12,7 @@ router.get('/employees/:id', requestErrorHandler(getEmployeeDetails));
 router.post('/employees/register', 
     body('employeeName').notEmpty().isString(),  
     body('address').notEmpty().isString(),  
-    body('mail').notEmpty().isString().isEmail(),  
+    body('mail').notEmpty().isEmail(),  
     body('phone_number').notEmpty()  .isNumeric().isLength({ min: 10, max: 11 }),
     body('position').notEmpty().isString(),  
     body('password').notEmpty().isString().isLength({min:8}),  

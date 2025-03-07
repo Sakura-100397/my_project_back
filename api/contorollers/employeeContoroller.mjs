@@ -35,7 +35,7 @@ export const getAllEmployees = async (req, res) => {
             res.json(rows[0]);
         }else{  
             console.log(`No employee found with id: ${id}`); 
-            res.status(404).json ( { message: "社員情報が見つかりません" });
+            res.status(404).json ( { message: "社員情報が見つかりません" ,status:404});
         }
     }catch (error) {    
         console.error('Error fetching employee:', error); 
